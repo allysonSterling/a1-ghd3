@@ -1,3 +1,5 @@
+GitHub Pages link: https://allysonsterling.github.io/a1-ghd3/
+
 Assignment 1 - Hello World: GitHub and d3  
 ===
 
