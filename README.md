@@ -1,5 +1,9 @@
 GitHub Pages link: https://allysonsterling.github.io/a1-ghd3/
 
+Sources used:
+https://observablehq.com/@d3/bubble-chart/2
+https://observablehq.com/@harrylove/draw-a-circle-with-d3
+
 Assignment 1 - Hello World: GitHub and d3  
 ===
 
