@@ -6,6 +6,7 @@ Sources used:
 https://observablehq.com/@d3/bubble-chart/2
 
 https://observablehq.com/@harrylove/draw-a-circle-with-d3
+
 https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorials/SVG_from_scratch/Gradients
 
 Assignment 1 - Hello World: GitHub and d3  
