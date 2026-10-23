@@ -9,6 +9,10 @@ https://observablehq.com/@harrylove/draw-a-circle-with-d3
 
 https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorials/SVG_from_scratch/Gradients
 
+
+Reference Photos
+
+
 Assignment 1 - Hello World: GitHub and d3  
 ===
 

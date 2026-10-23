@@ -21,6 +21,13 @@
         {x: ox+290, y: oy-147}, {x: ox+340, y: oy-185}, {x: ox+400, y: oy-220}, {x: ox+475, y: oy-242}, {x: ox+540, y: oy-216}]
     var curve1 = [{x: ox, y: oy-10}, {x: ox+100, y: oy-120}, {x: ox+200, y: oy-100}, {x: ox+300, y: oy-170}, {x: ox+500, y: oy-250}, {x: ox+600, y: oy-100}]
     var curve2 = [{x: ox+10, y: oy+10}, {x: ox+110, y: oy-100}, {x: ox+210, y: oy-80}, {x: ox+310, y: oy-150}, {x: ox+510, y: oy-230}, {x: ox+610, y: oy+20}]
+    var curve3 = [{x: ox, y: oy}, {x: ox-110, y: oy-100}, {x: ox-210, y: oy-400}]
+    var curve4 = [{x: ox, y: oy}, {x: ox-110, y: oy-75}, {x: ox-210, y: oy-300}]
+    var curve5 = [{x: ox, y: oy}, {x: ox-110, y: oy-55}, {x: ox-210, y: oy-200}]
+    var curve6 = [{x: ox, y: oy}, {x: ox-110, y: oy-30}, {x: ox-210, y: oy-120}]
+    var curve7 = [{x: ox, y: oy}, {x: ox-110, y: oy-15}, {x: ox-210, y: oy-50}]
+    var curve8 = [{x: ox, y: oy}, {x: ox-110, y: oy+10}, {x: ox-210, y: oy}]
+
     
     const width = 750;
     const height = 750;
@@ -57,10 +64,11 @@
 
     // Add Lines
     var curveFunc = d3.line()
-        .curve(d3.curveNatural) //curveBundle
+        .curve(d3.curveNatural)
         .x(function(d) { return d.x })
-        .y(function(d) { return d.y })
+        .y(function(d) { return d.y })  
 
+    //Define background gradient
     var gradient = svg.append("svg:defs")
         .append("svg:radialGradient")
         .attr("id", "gradient")
@@ -80,12 +88,12 @@
 
     gradient.append("svg:stop")
         .attr("offset", "50%")
-        .attr("stop-color", "#730B85")
+        .attr("stop-color", "#800080")
         .attr("stop-opacity", 1);
 
     gradient.append("svg:stop")
         .attr("offset", "100%")
-        .attr("stop-color", "#08695F")
+        .attr("stop-color", "#007C80")
         .attr("stop-opacity", 1);
 
     // Fill the circle with the gradient
@@ -96,21 +104,58 @@
         .attr('ry', width)
         .attr('fill', 'url(#gradient)');
 
-
+    //lines
     svg.append('path')
         .attr('d', curveFunc(curve1))
-        .attr('stroke', 'white')
-        .attr('stroke-width', 1.5)
+        .attr('stroke', 'black')
+        .attr('stroke-width', 3.5)
         .attr('fill', 'none');
 
     svg.append('path')
         .attr('d', curveFunc(curve2))
-        .attr('stroke', 'white')
-        .attr('stroke-width', 1.5)
+        .attr('stroke', 'black')
+        .attr('stroke-width', 3.5)
         .attr('fill', 'none');
 
-        svg.append('g')
-        .attr('fill', 'white')
+    svg.append('path')
+        .attr('d', curveFunc(curve3))
+        .attr('stroke', 'black')
+        .attr('stroke-width', 3.5)
+        .attr('fill', 'none');
+
+    svg.append('path')
+        .attr('d', curveFunc(curve4))
+        .attr('stroke', 'black')
+        .attr('stroke-width', 3.5)
+        .attr('fill', 'none');
+
+    svg.append('path')
+        .attr('d', curveFunc(curve5))
+        .attr('stroke', 'black')
+        .attr('stroke-width', 3.5)
+        .attr('fill', 'none');
+
+    svg.append('path')
+        .attr('d', curveFunc(curve6))
+        .attr('stroke', 'black')
+        .attr('stroke-width', 3.5)
+        .attr('fill', 'none');
+
+    svg.append('path')
+        .attr('d', curveFunc(curve7))
+        .attr('stroke', 'black')
+        .attr('stroke-width', 3.5)
+        .attr('fill', 'none');
+
+    svg.append('path')
+        .attr('d', curveFunc(curve8))
+        .attr('stroke', 'black')
+        .attr('stroke-width', 3.5)
+        .attr('fill', 'none');
+
+    //dots
+    svg.append('g')
+        .attr('fill', 'black')
       .selectAll("circle")
       .data(dots)
       .join('circle')
@@ -118,7 +163,17 @@
         .attr('cy', d => d.y)
         .attr('r', 8);
 
+    //zig zag IN PROGEESS
+    svg.append('g')
+        .attr('fill', 'black')
+      .selectAll("polygon")
+      .data(dots)
+      .join('poly1')
+        .attr('cx', d => d.x)
+        .attr('cy', d => d.y)
+        .attr('r', 8);   
 
+    //Define center gradient
     var gradientcenter = svg.append("svg:defs")
         .append("svg:radialGradient")
         .attr("id", "gradientcenter")
@@ -143,10 +198,12 @@
 
     gradientcenter.append("svg:stop")
         .attr("offset", "100%")
-        .attr("stop-color", "#6E105B")
+        .attr("stop-color", "#560319")
         .attr("stop-opacity", 1);   
 
     svg.append("circle")
+        .attr('stroke', '#560319')
+        .attr('stroke-width', 2)
         .attr('cx', ox)
         .attr('cy', oy)
         .attr('r', 20)
