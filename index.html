@@ -4,31 +4,158 @@
   <meta charset="utf-8">
   <title>A1: Hello World, GitHub and d3</title>
 </head>
-<body>
+<body style="background-color:black;">
+<!--<style>body{background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQgE-Yn1Wh2TmeqlhaYzT1-mCVM0lasK83xgh0T0FTgBB8O8DGU17VCGhU&s=10');
+  background-repeat: no-repeat;  
+  background-size: 100% 100%;}</style>-->
   <div id="container"></div>
   <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
   <script>
     console.log("d3 version", d3.version); // test that d3 loaded
-    const width = 200;
-    const height = 200;
-    const margin = 10;
+    
+    const ox = 200;
+    const oy = 500;
+
+    //var circles = [{id: "0", value: 23}, {id: "1", value: 34}, {id: "2", value:24}, {id: "5", value: 56}]
+    var dots = [{x: ox+22, y: oy-25}, {x:ox+48, y: oy-62}, {x:ox+83, y: oy-98}, {x: ox+130, y: oy-110}, {x: ox+180, y: oy-95}, {x: ox+240, y: oy-107}, 
+        {x: ox+290, y: oy-147}, {x: ox+340, y: oy-185}, {x: ox+400, y: oy-220}, {x: ox+475, y: oy-242}, {x: ox+540, y: oy-216}]
+    var curve1 = [{x: ox, y: oy-10}, {x: ox+100, y: oy-120}, {x: ox+200, y: oy-100}, {x: ox+300, y: oy-170}, {x: ox+500, y: oy-250}, {x: ox+600, y: oy-100}]
+    var curve2 = [{x: ox+10, y: oy+10}, {x: ox+110, y: oy-100}, {x: ox+210, y: oy-80}, {x: ox+310, y: oy-150}, {x: ox+510, y: oy-230}, {x: ox+610, y: oy+20}]
+    
+    const width = 750;
+    const height = 750;
+    const margin = 0;
+
+    const group = d => d.id;
+    const color = d3.scaleOrdinal(d3.schemeDark2);
+
+
+    /*const pack = d3.pack()
+        .size([width - margin * 2, height - margin * 2])
+        .padding(3);
+    const root = pack(d3.hierarchy({children: circles})
+        .sum(d => d.value));*/
+
     // Add an SVG
     const svg = d3.create("svg")
         .attr("width", width)
         .attr("height", height)
-        .attr("viewBox", [-margin, -margin, width, height]);
+        //.attr("viewBox", [-margin, -margin, width, height]);
     // Add Rectangles
     // Add Circles
-    svg.append("circle")
-        .attr('cx', '50%')
-        .attr('cy', '50%')
-        .attr('r', 20)
-        .attr('fill', 'purple');
+    /*const node = svg.append("g")
+        .selectAll()
+        .data(root.leaves())
+        .join("g")
+        .attr("transform", d => `translate(${d.x},${d.y})`);
 
-    container.append(svg.node());
-    //returnsvg.node();
+    node.append("circle")
+      .attr("fill-opacity", 0.7)
+      .attr("fill", d => color(group(d.circles)))
+      .attr("r", d => d.r);*/
+
+
     // Add Lines
+    var curveFunc = d3.line()
+        .curve(d3.curveNatural) //curveBundle
+        .x(function(d) { return d.x })
+        .y(function(d) { return d.y })
+
+    var gradient = svg.append("svg:defs")
+        .append("svg:radialGradient")
+        .attr("id", "gradient")
+        .attr("x1", "0%")
+        .attr("y1", "0%")
+        .attr("x2", "50%")
+        .attr("y2", "50%")
+        .attr("x3", "100%")
+        .attr("y3", "100%")
+        .attr("spreadMethod", "pad");
+
+    // Define the gradient colors
+    gradient.append("svg:stop")
+        .attr("offset", "0%")
+        .attr("stop-color", "#3D092A")
+        .attr("stop-opacity", 1);
+
+    gradient.append("svg:stop")
+        .attr("offset", "50%")
+        .attr("stop-color", "#730B85")
+        .attr("stop-opacity", 1);
+
+    gradient.append("svg:stop")
+        .attr("offset", "100%")
+        .attr("stop-color", "#08695F")
+        .attr("stop-opacity", 1);
+
+    // Fill the circle with the gradient
+    var circle = svg.append('ellipse')
+        .attr('cx', ox)
+        .attr('cy', oy)
+        .attr('rx', height)
+        .attr('ry', width)
+        .attr('fill', 'url(#gradient)');
+
+
+    svg.append('path')
+        .attr('d', curveFunc(curve1))
+        .attr('stroke', 'white')
+        .attr('stroke-width', 1.5)
+        .attr('fill', 'none');
+
+    svg.append('path')
+        .attr('d', curveFunc(curve2))
+        .attr('stroke', 'white')
+        .attr('stroke-width', 1.5)
+        .attr('fill', 'none');
+
+        svg.append('g')
+        .attr('fill', 'white')
+      .selectAll("circle")
+      .data(dots)
+      .join('circle')
+        .attr('cx', d => d.x)
+        .attr('cy', d => d.y)
+        .attr('r', 8);
+
+
+    var gradientcenter = svg.append("svg:defs")
+        .append("svg:radialGradient")
+        .attr("id", "gradientcenter")
+        .attr("x1", "0%")
+        .attr("y1", "0%")
+        .attr("x2", "50%")
+        .attr("y2", "50%")
+        .attr("x3", "100%")
+        .attr("y3", "100%")
+        .attr("spreadMethod", "pad");
+
+    // Define the gradient colors
+    gradientcenter.append("svg:stop")
+        .attr("offset", "0%")
+        .attr("stop-color", "white")
+        .attr("stop-opacity", 1);
+
+    gradientcenter.append("svg:stop")
+        .attr("offset", "50%")
+        .attr("stop-color", "#A30064")
+        .attr("stop-opacity", 1);
+
+    gradientcenter.append("svg:stop")
+        .attr("offset", "100%")
+        .attr("stop-color", "#6E105B")
+        .attr("stop-opacity", 1);   
+
+    svg.append("circle")
+        .attr('cx', ox)
+        .attr('cy', oy)
+        .attr('r', 20)
+        .attr('fill', 'url(#gradientcenter)');
+
+
+
     // Add Polygons
+    container.append(svg.node());
   </script>
 </body>
 </html>
