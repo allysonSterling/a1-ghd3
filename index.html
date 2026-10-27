@@ -125,7 +125,8 @@
     var rings = [{cx:ox-110, cy: oy+150, rx: 10, ry: 10},{cx:ox-108, cy: oy+150, rx: 32, ry: 30},{cx:ox-106, cy: oy+150, rx: 54, ry: 50},
         {cx:ox-100, cy: oy+150, rx: 76, ry: 70},{cx:ox-92, cy: oy+150, rx: 98, ry: 90},
         {cx:ox-60, cy: oy+37, rx: 5, ry: 5},{cx:ox-60, cy: oy+37, rx: 15, ry: 15},{cx:ox-60, cy: oy+37, rx: 23, ry: 23},
-        {cx:ox-170, cy: oy+45, rx: 5, ry: 5},{cx:ox-170, cy: oy+45, rx: 15, ry: 15},{cx:ox-170, cy: oy+45, rx: 25, ry: 25},{cx:ox-170, cy: oy+45, rx: 33, ry: 37}]
+        {cx:ox-170, cy: oy+45, rx: 5, ry: 5},{cx:ox-170, cy: oy+45, rx: 15, ry: 15},{cx:ox-170, cy: oy+45, rx: 25, ry: 25},{cx:ox-170, cy: oy+45, rx: 33, ry: 37},
+        {cx:ox+90, cy: oy-10, rx: 20, ry: 15},{cx:ox+90, cy: oy-10, rx: 30, ry: 25},{cx:ox+90, cy: oy-10, rx: 40, ry: 35}]
 
     svg.append('g')
         .attr('fill', 'none')
@@ -139,20 +140,60 @@
         .attr('rx', d => d.rx)
         .attr('ry', d => d.ry);
 
-    function appendCircle(x,y,r){
+    function appendCircle(x,y,r,color,){
         svg.append('circle')
-            .attr('fill', 'black')
+            .attr('fill', color)
+            .attr('stroke', 'black')
+            .attr('stroke-width',3.5)
             .attr('cx', ox+x)
             .attr('cy', oy+y)
             .attr('r', r);
     }
 
-    appendCircle(-110,40,15)
-    appendCircle(30,220,15)
-    appendCircle(-180,220,8)
+    appendCircle(-110,40,15,'black')
+    appendCircle(30,220,15,'black')
+    appendCircle(-180,220,8,'black')
+    appendCircle(90,-10,7,'black')
 
     //Cells
+    appendCircle(330,-90,10,'black')
+    appendCircle(320,-80,30,'none')
 
+    appendCircle(460,165,8,'black')
+    appendCircle(480,175,45,'none')
+
+    appendCircle(290,15,40,'black')
+    appendCircle(340,25,40,'black')  
+    appendCircle(290,15,32,'#800080')
+    svg.append('circle')
+        .attr('fill', '#800080')
+        .attr('stroke', 'none')
+        .attr('cx', ox+340)
+        .attr('cy', oy+25)
+        .attr('r', 32);
+
+    svg.append('ellipse')
+        .attr('fill', 'none')
+        .attr('stroke', 'black')
+        .attr('stroke-width',5)
+        .attr('cx', ox+470)
+        .attr('cy', oy-100)
+        .attr('rx', 70)
+        .attr('ry', 40); 
+    appendCircle(440,-100,20,'none')
+    appendCircle(440,-100,7,'black') 
+    appendCircle(500,-100,7,'black') 
+
+    svg.append('ellipse')
+        .attr('fill', 'black')
+        .attr('stroke', 'black')
+        .attr('stroke-width',5)
+        .attr('cx', ox+490)
+        .attr('cy', oy+15)
+        .attr('rx', 35)
+        .attr('ry', 50);
+    appendCircle(490,-5,15,'#620080')
+    appendCircle(490,35,15,'#620080')
 
     //Zig zag (polygons)
     function appendZig(points){

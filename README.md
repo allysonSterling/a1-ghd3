@@ -1,7 +1,9 @@
 GitHub Pages link: https://allysonsterling.github.io/a1-ghd3/index.html
 
+Inteded image: ![alt text](image.png)
 
-Sources used:
+
+Sources Referenced:
 
 https://observablehq.com/@d3/bubble-chart/2
 
